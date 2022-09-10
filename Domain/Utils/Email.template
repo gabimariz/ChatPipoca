@@ -1,0 +1,39 @@
+/*
+	Rename file to Email.cs and configuring
+*/
+
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+using MimeKit.Text;
+
+namespace Domain.Utils;
+
+public static class Email
+{
+	// Email settings
+	private const string From = "EMAIL";
+	private const string Password = "EMAIL_PASSWORD";
+	private const string Smtp = "smtp.gmail.com";
+	private const int Port = 587;
+
+	public static void Send(string to, string subject, string html)
+	{
+		// Create message
+		var email = new MimeMessage();
+		email.From.Add(MailboxAddress.Parse(From));
+		email.To.Add(MailboxAddress.Parse(to));
+		email.Subject = subject;
+		email.Body = new TextPart(TextFormat.Html)
+		{
+			Text = html
+		};
+
+		// Send email
+		using var smtp = new SmtpClient();
+		smtp.Connect(Smtp, Port, SecureSocketOptions.StartTls);
+		smtp.Authenticate(From, Password);
+		smtp.Send(email);
+		smtp.Disconnect(true);
+	}
+}
