@@ -30,7 +30,6 @@ public class UsersController : ControllerBase
 	/// </summary>
 	/// <response code="200">All users</response>
 	/// <response code="204">No content</response>
-	/// <returns>Users</returns>
 	[Authorize(Roles = "Admin")]
 	[HttpGet]
 	public async Task<ActionResult<List<User>>> GetAll()
@@ -49,9 +48,8 @@ public class UsersController : ControllerBase
 	///		Create new user
 	/// </summary>
 	/// <param name="input"></param>
-	/// <response code="200"></response>
-	/// <response code=""></response>
-	/// <returns></returns>
+	/// <response code="200">User created successfully</response>
+	/// <response code="422">There is already and account registered</response>
 	[HttpPost]
 	public async Task<ActionResult> Post([FromBody] UserInput input)
 	{
@@ -78,7 +76,9 @@ public class UsersController : ControllerBase
 	///		Get user by id
 	/// </summary>
 	/// <param name="id"></param>
-	/// <returns></returns>
+	/// <response code="200">User</response>
+	/// <response code="401">Fill in your profile to access</response>
+	/// <response code="404">User not found</response>
 	[Authorize]
 	[HttpGet("{id:guid}")]
 	public async Task<ActionResult<User>> GetById([FromRoute] Guid id)
@@ -101,7 +101,8 @@ public class UsersController : ControllerBase
 	///		Delete user by id
 	/// </summary>
 	/// <param name="id"></param>
-	/// <returns></returns>
+	/// <response code="200">User deleted</response>
+	/// <response code="404">User not found</response>
 	[HttpDelete("{id:guid}")]
 	public async Task<ActionResult> Destroy([FromRoute] Guid id)
 	{
