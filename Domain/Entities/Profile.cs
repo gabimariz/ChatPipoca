@@ -20,6 +20,8 @@ public class Profile
 
 	public virtual User? User { get; set; }
 
+	public virtual GlobalChat? GlobalChat { get; set; }
+
 	public DateTime CreateAt { get; set; }
 
 	public DateTime UpdateAt { get; set; }
