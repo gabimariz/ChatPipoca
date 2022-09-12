@@ -24,7 +24,9 @@ public class TokensController : ControllerBase
 	///		Active your account
 	/// </summary>
 	/// <param name="pass"></param>
-	/// <returns></returns>
+	/// <response code="200">Account activated successfully</response>
+	/// <response code="422">Unable to activate your account</response>
+	/// <response code="422">Activation time expired</response>
 	[HttpGet("{pass}")]
 	public async Task<ActionResult> GetByPass([FromRoute] string pass)
 	{
