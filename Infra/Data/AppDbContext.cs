@@ -18,9 +18,12 @@ public class AppDbContext : DbContext
 		new UserMap(modelBuilder.Entity<User>());
 		new ProfileMap(modelBuilder.Entity<Profile>());
 		new TokenMap(modelBuilder.Entity<Token>());
+		new GlobalChatMap(modelBuilder.Entity<GlobalChat>());
 	}
 
 	public DbSet<User>? Users { get; set; }
 	public DbSet<Profile>? Profiles { get; set; }
 	public DbSet<Token>? Tokens { get; set; }
+
+	public DbSet<GlobalChat>? GlobalChats { get; set; }
 }
