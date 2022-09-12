@@ -22,7 +22,8 @@ public class ProfilesController : ControllerBase
 	///		Create profile
 	/// </summary>
 	/// <param name="input"></param>
-	/// <returns></returns>
+	/// <response code="200">Profile created successfully</response>
+	/// <response code="422">Unable to create your profile</response>
 	[HttpPost]
 	public async Task<ActionResult> Post([FromBody] ProfileInput input)
 	{
