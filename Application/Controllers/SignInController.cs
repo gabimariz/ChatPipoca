@@ -25,7 +25,10 @@ public class SignInController : ControllerBase
 	///		Login user
 	/// </summary>
 	/// <param name="input"></param>
-	/// <returns>JWT token</returns>
+	/// <response code="200">JWT token</response>
+	/// <response code="404">User not found</response>
+	/// <response code="400">Passwords not match</response>
+	/// <response code="400">User not activated</response>
 	[HttpPost]
 	public async Task<ActionResult> Post([FromBody] SignInInput input)
 	{
