@@ -9,8 +9,8 @@ public class AppDbContext : DbContext
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
 		optionsBuilder.UseMySql(
-			"server=localhost;username=gabriel;password=root;database=cp_data",
-			new MariaDbServerVersion(new Version(10, 8, 3)));
+			"server=localhost;username=docker_user;password=gq7cyo4e;database=cp_data",
+			new MariaDbServerVersion(new Version(10, 9, 2)));
 	}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
