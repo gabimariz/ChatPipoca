@@ -1,0 +1,6 @@
+version: '3.4'
+
+services:
+  mariadb:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
