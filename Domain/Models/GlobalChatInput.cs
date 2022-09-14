@@ -12,4 +12,6 @@ public class GlobalChatInput
 	public Guid UserId { get; set; }
 
 	public Guid FromId { get; set; }
+
+	public Guid ToId { get; set; }
 }
