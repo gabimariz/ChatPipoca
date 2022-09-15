@@ -6,12 +6,8 @@ namespace Infra.Data;
 
 public class AppDbContext : DbContext
 {
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
-		optionsBuilder.UseMySql(
-			"server=localhost;username=docker_user;password=gq7cyo4e;database=cp_data",
-			new MariaDbServerVersion(new Version(10, 9, 2)));
-	}
+	public AppDbContext(DbContextOptions<AppDbContext> options)
+		: base(options) {}
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{

@@ -4,6 +4,7 @@ using Application.Extensions;
 using Domain.Utils;
 using Infra.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,7 +34,15 @@ builder.Services.AddAuthentication(p =>
 	};
 });
 
-builder.Services.AddDbContext<AppDbContext>();
+var configuration = builder.Configuration;
+
+var host = configuration["DBHOST"] ?? "localhost";
+var port = configuration["DBPORT"] ?? "3306";
+var password = configuration["DBPASSWORD"] ?? "gq7cyo4e";
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+	options.UseMySql($"server={host};port={port};username=docker_user;password={password};database=cp_data",
+		new MariaDbServerVersion(new Version(10, 8, 3))));
 
 builder.Services.AddRepositories();
 builder.Services.AddServices();
