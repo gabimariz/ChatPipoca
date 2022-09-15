@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  mariadb:
+  api:
     image: ${DOCKER_REGISTRY-}mariadb
     container_name: chatpipoca
     build:
@@ -11,16 +11,22 @@ services:
       - database
     ports:
       - "5000:80"
+    networks:
+      vpcbr:
+        ipv4_address: 172.29.0.5
     restart: always
     environment:
       - DBHOST=database
       - ASPNETCORE_ENVIRONMENT=Development
 
   database:
-    image: mariadb:10.9.2
+    image: mariadb:10.8.3
     container_name: mariadb
     ports:
       - "3306:3306"
+    networks:
+      vpcbr:
+        ipv4_address: 172.29.0.3
     expose:
       - 3306
     volumes:
@@ -34,3 +40,9 @@ services:
 
 volumes:
   db-volume:
+
+networks:
+  vpcbr:
+    ipam:
+      config:
+        - subnet: 172.29.0.0/24
