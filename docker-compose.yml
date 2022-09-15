@@ -1,23 +1,24 @@
 version: '3.4'
 
 services:
-  api:
-    image: ${DOCKER_REGISTRY-}mariadb
-    container_name: chatpipoca
+  angular.docker:
+    image: ${DOCKER_REGISTRY-}angulardocker
     build:
       context: .
       dockerfile: Dockerfile
-    depends_on:
-      - database
+      args:
+        - skip_client_build=true
+
+  angular.app:
+    image: ${DOCKER_REGISTRY-}angularapp
+    build:
+      context: .
+      dockerfile: ClientApp/Dockerfile
     ports:
-      - "5000:80"
-    networks:
-      vpcbr:
-        ipv4_address: 172.29.0.5
-    restart: always
-    environment:
-      - DBHOST=database
-      - ASPNETCORE_ENVIRONMENT=Development
+      - "4200:4200"
+      - "48153:49153"
+    volumes:
+      - ./ClientApp:/app
 
   database:
     image: mariadb:10.8.3
@@ -37,6 +38,24 @@ services:
       MARIADB_USER: docker_user
       MARIADB_PASSWORD: gq7cyo4e
       MARIADB_DATABASE: cp_data
+
+  api:
+    image: ${DOCKER_REGISTRY-}mariadb
+    container_name: chatpipoca
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    ports:
+      - "5000:80"
+    networks:
+      vpcbr:
+        ipv4_address: 172.29.0.5
+    restart: always
+    environment:
+      - DBHOST=database
+      - ASPNETCORE_ENVIRONMENT=Development
 
 volumes:
   db-volume:
