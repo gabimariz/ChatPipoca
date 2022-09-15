@@ -7,9 +7,17 @@ $ git clone https://github.com/gabimariz/ChatPipoca.git
 # Open project folder
 $ cd ChatPipoca
 
-#Install dotnet-ef global
+# Install dotnet-ef global
 $ dotnet tool install --global dotnet-ef
 
-# use package manager dotnet to restore packages
+# Use package manager dotnet to restore packages
 $ dotnet restore
+
+# Install dependencies client
+$ cd ClientApp
+$ npm install
+
+# Create docker image
+$ cd ..
+$ docker-compose up -d
 ```
