@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.navbar {
+  background-color: var(--dark);
+  color: var(--white);
+}
+
+.nav-link {
+  color: var(--secondary);
+}
+
+.navbar a:hover,
+.navbar a:focus,
+.cp-active {
+  color: var(--info);
+}
+
+a img.logo {
+  height: 45px;
+  width: 45px;
+}
